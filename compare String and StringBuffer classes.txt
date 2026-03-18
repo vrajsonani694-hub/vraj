@@ -1,0 +1,14 @@
+class StringBuffertj
+{
+	public static void main(String[]args)
+	{
+		String str = "Hello";
+		str.concat("World!");
+		
+		System.out.println("String immutable:" + str);
+		StringBuffer tj = new StringBuffer("Hello");
+		
+		tj.append(" World!");
+		System.out.println("StringBuffer mutable:" + tj );
+	}
+}

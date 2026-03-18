@@ -1,0 +1,27 @@
+class MyThread extends Thread
+{
+    MyThread(String name, int priority)
+    {
+        super(name);
+        setPriority(priority);
+    }
+    public void run()
+    {
+        for(int i=1;i<=5;i++)
+        {
+            System.out.println(getName()+" running with priority "+getPriority());
+        }
+    }
+}
+public class PriorityDemo
+{
+    public static void main(String[] args)
+    {
+        MyThread t1 = new MyThread("low priority thread", Thread.MIN_PRIORITY);
+        MyThread t2 = new MyThread("normal priority thread", Thread.NORM_PRIORITY);
+        MyThread t3 = new MyThread("high priority thread", Thread.MAX_PRIORITY);
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}

@@ -1,0 +1,20 @@
+class Dog
+{
+ String name;
+ String breed;
+
+	Dog(String name, String breed)
+	{
+		this.name = name;
+		this.breed = breed;
+		
+		System.out.println("A new Dog object has been created.");
+		System.out.println("Name: " + this.name);
+		System.out.println("Breed: " + this.breed);
+	}
+	
+	public static void main(String[] args)
+	{
+		Dog myDog = new Dog("Buddy", "Golden Retriever");
+	}
+}

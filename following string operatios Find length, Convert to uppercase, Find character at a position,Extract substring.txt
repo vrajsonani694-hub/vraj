@@ -1,0 +1,18 @@
+public class StringOperatios
+{
+	public static void main(String[]args)
+	{
+		String str = "JavaProgramming";
+
+		int length = str.length();
+		String upper = str.toUpperCase();
+		char charAt5 = str.charAt(5);
+		String sub = str.substring(5,11);
+		
+		System.out.println("Original:" + str);
+		System.out.println("Length:" + length);
+		System.out.println("Uppercase:" + upper);
+		System.out.println("Charcter at index 5:" + charAt5);
+		System.out.println("Substring(5 to 10):" + sub);
+ }
+}
