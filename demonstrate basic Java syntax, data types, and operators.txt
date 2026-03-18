@@ -1,0 +1,25 @@
+class BasicJava
+{
+int a=10;
+double b=5.5;
+char c = 'p';
+boolean d = true;
+String e="Tushar";
+void display()
+{
+	System.out.println("int: " + a);
+	System.out.println("double: " + b);
+	System.out.println("char: " + c);
+	System.out.println("boolean: " + d);
+	System.out.println("String: " + e);
+	System.out.println("a + b = " + (a + b));
+	System.out.println("a - b = " + (a - b));
+	System.out.println("a * b = " + (a * b));
+	System.out.println("a / b = " + (a / b));
+}
+	public static void main(String[]args)
+	{
+		BasicJava bj = new BasicJava();
+		bj.display();
+	}
+}

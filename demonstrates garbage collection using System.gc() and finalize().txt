@@ -1,0 +1,16 @@
+class T
+{
+	protected void finalize() throws Throwable
+	{
+		System.out.println("Finalize Called Before Garbage Collection");
+	}
+}
+public class FinalizeGarbage
+{
+	public static void main(String[]args)
+	{
+		T obj = new T();
+		obj = null;
+		System.gc();
+	}
+}

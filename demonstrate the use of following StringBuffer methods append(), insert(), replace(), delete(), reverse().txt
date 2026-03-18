@@ -1,0 +1,15 @@
+public class StringBufferMethods
+{
+	public static void main(String[]args)
+	{
+		StringBuffer sb = new StringBuffer("Java");
+		sb.append(" programming");
+		sb.insert(5,"Language ");
+		sb.replace(5,13,"Core ");
+		sb.delete(5,10);
+		sb.reverse();
+		
+		System.out.println("Final StringBuffer content: " + sb);
+	}
+}
+

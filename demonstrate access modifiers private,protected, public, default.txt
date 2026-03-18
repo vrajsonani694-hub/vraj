@@ -1,0 +1,23 @@
+class AccessExample
+{
+	private int privateVar = 1;
+	protected int protectedVar = 2;
+	public int publicVar = 3;
+	int defaultVar = 4;
+	
+	void display()
+	{
+		System.out.println(privateVar + "," + protectedVar + "," + publicVar + "," +defaultVar);
+	}
+}
+
+public class AccessTest
+{
+	public static void main(String[] args)
+	{
+		AccessExample obj = new AccessExample();
+		obj.display();
+		System.out.println(obj.publicVar);
+	}
+}
+

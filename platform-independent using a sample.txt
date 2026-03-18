@@ -1,0 +1,8 @@
+public class PlatformIndependent
+{
+	public static void main(String[]args)
+	{
+		System.out.println("Java is platform-independent because"+ "the
+		bytecode (.class file) runs on any OS with JVM");
+	}
+}

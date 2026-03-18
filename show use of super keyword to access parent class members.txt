@@ -1,0 +1,23 @@
+class Animal
+{
+	void speak()
+	{
+		System.out.println("Animal speaks.");
+	}
+}
+class Dog extends Animal
+{
+	void speak()
+	{
+		super.speak();
+		System.out.println("Dog barks.");
+	}
+}
+public class accessparentclass
+{
+	public static void main(String[] args)
+	{
+		Dog d = new Dog();
+	d.speak();
+	}
+}

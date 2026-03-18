@@ -1,0 +1,18 @@
+class CarColor
+{
+	private String color;
+	CarColor(String color)
+	{
+		this.color = color;
+	}
+	void displayColor()
+	{
+	System.out.println("Car color: " + this.color);
+	}
+
+	public static void main(String[] args)
+	{
+		CarColor myCar = new CarColor("Black");
+		myCar.displayColor();
+	}
+}
