@@ -1,0 +1,505 @@
+
+Q.1 Employees Table Operations
+
+CREATE TABLE employees(
+  eno INT,
+  ename VARCHAR(20),
+  edesignation VARCHAR(20),
+  contact_no NUMBER,
+  salary NUMBER,
+  email VARCHAR(50),
+  city VARCHAR(20),
+  bdate DATE,
+  hiredate DATE
+);
+INSERT INTO employees VALUES(101,'Amit','Manager',9876543210,45000,'amit@gmail.com','Mumbai',TO_DATE('15-03-1990','DD-MM-YYYY'),TO_DATE('01-01-2015','DD-MM-YYYY'));
+INSERT INTO employees VALUES(102,'Deepa','Accountant',8765432109,22000,'deepa@gmail.com','Surat',TO_DATE('31-03-1990','DD-MM-YYYY'),TO_DATE('15-06-2018','DD-MM-YYYY'));
+INSERT INTO employees VALUES(103,'Ravi','Clerk',7654321098,18000,'ravi@gmail.com','Vadodara',TO_DATE('10-10-1992','DD-MM-YYYY'),TO_DATE('20-09-2019','DD-MM-YYYY'));
+INSERT INTO employees VALUES(104,'Kiran','Manager',9988776655,50000,'kiran@gmail.com','Pune',TO_DATE('05-05-1988','DD-MM-YYYY'),TO_DATE('10-02-2012','DD-MM-YYYY'));
+INSERT INTO employees VALUES(105,'Neha','Accountant',8899776655,24000,'neha@gmail.com','Ahmedabad',TO_DATE('21-07-1993','DD-MM-YYYY'),TO_DATE('12-11-2017','DD-MM-YYYY'));
+INSERT INTO employees VALUES(106,'Rahul','Salesman',7788996655,15000,'rahul@gmail.com','Surat',TO_DATE('12-12-1994','DD-MM-YYYY'),TO_DATE('01-08-2020','DD-MM-YYYY'));
+INSERT INTO employees VALUES(107,'Divya','Accountant',6677889900,26000,'divya@gmail.com','Surat',TO_DATE('03-03-1991','DD-MM-YYYY'),TO_DATE('25-04-2016','DD-MM-YYYY'));
+INSERT INTO employees VALUES(108,'Anil','Clerk',7766554433,12000,'anil@gmail.com','Surat',TO_DATE('09-09-1995','DD-MM-YYYY'),TO_DATE('30-06-2021','DD-MM-YYYY'));
+INSERT INTO employees VALUES(109,'Pooja','Manager',6655443322,47000,'pooja@gmail.com','Mumbai',TO_DATE('27-02-1989','DD-MM-YYYY'),TO_DATE('05-05-2014','DD-MM-YYYY'));
+INSERT INTO employees VALUES(110,'Disha','Clerk',5544332211,8000,'disha@gmail.com','Surat',TO_DATE('18-08-1996','DD-MM-YYYY'),TO_DATE('01-03-2022','DD-MM-YYYY'));
+SELECT * FROM employees;
+SELECT * FROM employees WHERE edesignation = 'Accountant';
+SELECT * FROM employees ORDER BY ename;
+SELECT * FROM employees WHERE salary < 25000;
+DELETE FROM employees WHERE salary < 10000;
+UPDATE employees SET ename = 'UpdatedName' WHERE eno = 404;
+UPDATE employees SET salary = salary + 2000 WHERE LOWER(edesignation) = 'manager';
+SELECT * FROM employees WHERE salary BETWEEN 20000 AND 30000;
+SELECT * FROM employees WHERE ename LIKE 'A%';
+SELECT * FROM employees WHERE ename LIKE 'D%A';
+
+
+
+Q2.Student and Department Tables
+
+CREATE TABLE tbldept (
+  dno INT PRIMARY KEY,
+  dname VARCHAR(50)
+);
+CREATE TABLE tblstud_info99 (
+  rno INT PRIMARY KEY,
+  fname VARCHAR(50),
+  sname VARCHAR(50),
+  dno INT,
+  sem INT,
+  contact_no NUMBER,
+  gender VARCHAR(10),
+  bdate DATE,
+  percentage NUMBER,
+  CONSTRAINT fk_dept FOREIGN KEY (dno) REFERENCES tbldept(dno)
+);
+INSERT INTO tbldept VALUES(1,'Information Technology');
+INSERT INTO tbldept VALUES(2,'Civil');
+INSERT INTO tbldept VALUES(3,'Mechanical');
+INSERT INTO tbldept VALUES(4,'Electrical');
+INSERT INTO tbldept VALUES(5,'Computer');
+INSERT INTO tblstud_info99 VALUES(101,'Pooja','Patel',1,5,987654321, 'F', TO_DATE('31-03-2005','DD-MM-YYYY'), 78);
+INSERT INTO tblstud_info99 VALUES(102,'Ravi','Shah',2,3,876543210, 'M', TO_DATE('15-08-2004','DD-MM-YYYY'), 67);
+INSERT INTO tblstud_info99 VALUES(103,'Deepa','Patel',1,5,765432109, 'F', TO_DATE('31-03-2005','DD-MM-YYYY'), 82);
+INSERT INTO tblstud_info99 VALUES(104,'Amit','Mehta',3,2,654321098, 'M', TO_DATE('01-01-2004','DD-MM-YYYY'), 59);
+INSERT INTO tblstud_info99 VALUES(105,'Kiran','Joshi',5,6,543210987, 'M', TO_DATE('25-12-2003','DD-MM-YYYY'), 91);
+SELECT s.* FROM tblstud_info99 s JOIN tbldept d ON s.dno = d.dno WHERE d.dname = 'Information Technology';
+SELECT s.*, d.dname FROM tblstud_info99 s JOIN tbldept d ON s.dno = d.dno;
+SELECT s.*, d.dname FROM tblstud_info99 s JOIN tbldept d ON s.dno = d.dno WHERE s.sname = 'Patel';
+SELECT * FROM tblstud_info99 WHERE rno IN (101,102,103);
+SELECT * FROM tblstud_info99 WHERE fname LIKE 'P%';
+UPDATE tblstud_info99 SET sname = 'Updated' WHERE rno = 105;
+SELECT s.*, d.dname FROM tblstud_info99 s JOIN tbldept d ON s.dno = d.dno WHERE d.dname NOT IN ('Civil','Mechanical');
+SELECT s.*, d.dname FROM tblstud_info99 s JOIN tbldept d ON s.dno = d.dno WHERE TO_CHAR(s.bdate,'DD/MM/YYYY') = '31/03/2005';
+SELECT d.dname, COUNT(*) AS total_students FROM tblstud_info99 s JOIN tbldept d ON s.dno = d.dno GROUP BY d.dname ORDER BY total_students DESC;
+
+
+
+
+
+Q.3 Client Master Table
+
+
+CREATE TABLE client_master (
+  clientno VARCHAR2(6) PRIMARY KEY,
+  name VARCHAR2(50),
+  address1 VARCHAR2(100),
+  address2 VARCHAR2(100),
+  city VARCHAR2(50),
+  pincode NUMBER(6),
+  state VARCHAR2(50),
+  bal_due NUMBER(12),
+  telephone NUMBER(10)
+);
+INSERT INTO client_master VALUES('C00001','Ramesh','Addr1','Addr2','Mumbai',400001,'Maharashtra',5000,9876543210);
+INSERT INTO client_master VALUES('C00002','Suresh','Addr1','Addr2','Pune',411001,'Maharashtra',2500,8765432109);
+INSERT INTO client_master VALUES('C00003','Meena','Addr1','Addr2','Surat',395003,'Gujarat',0,7654321098);
+INSERT INTO client_master VALUES('C00004','Asha','Addr1','Addr2','Bangalore',560001,'Karnataka',1200,9988776655);
+INSERT INTO client_master VALUES('C00005','Vikram','Addr1','Addr2','Bangalore',560002,'Karnataka',3000,8899776655);
+INSERT INTO client_master VALUES('C00006','Kavita','Addr1','Addr2','Delhi',110001,'Delhi',4500,7788996655);
+INSERT INTO client_master VALUES('C00007','Anil','Addr1','Addr2','Mumbai',400002,'Maharashtra',800,6677889900);
+INSERT INTO client_master VALUES('C00008','Pooja','Addr1','Addr2','Ahmedabad',380001,'Gujarat',1500,7766554433);
+INSERT INTO client_master VALUES('C00009','Ritu','Addr1','Addr2','Nagpur',440001,'Maharashtra',2200,6655443322);
+INSERT INTO client_master VALUES('C00010','Dinesh','Addr1','Addr2','Surat',395004,'Gujarat',600,5544332211);
+SELECT name FROM client_master;
+SELECT * FROM client_master;
+SELECT name, city, state FROM client_master;
+DESC client_master;
+UPDATE client_master SET bal_due = 1000 WHERE clientno = 'C00001';
+UPDATE client_master SET city = 'Pune' WHERE clientno = 'C00009';
+ALTER TABLE client_master ADD (telephone NUMBER(10));
+UPDATE client_master SET city = 'Bangalore' WHERE clientno = 'C00005';
+SELECT clientno, name, telephone FROM client_master;
+
+
+
+Q.4 Employees & Departments (Joins)
+
+CREATE TABLE department (
+  dno INT PRIMARY KEY,
+  dname VARCHAR(50)
+);
+SELECT e.ename, d.dname FROM employees e JOIN department d ON e.dno = d.dno;
+SELECT e.ename, d.dname FROM employees e LEFT JOIN department d ON e.dno = d.dno;
+SELECT e.ename, d.dname FROM employees e RIGHT JOIN department d ON e.dno = d.dno;
+SELECT e.ename, d.dname FROM employees e FULL OUTER JOIN department d ON e.dno = d.dno;
+SELECT d.dname, AVG(e.salary) AS avg_salary FROM employees e JOIN department d ON e.dno = d.dno GROUP BY d.dname;
+SELECT d.dname, e.ename, e.salary FROM employees e JOIN department d ON e.dno = d.dno
+WHERE (d.dname, e.salary) IN (
+  SELECT d.dname, MAX(e2.salary) FROM employees e2 JOIN department d2 ON e2.dno = d2.dno GROUP BY d2.dname
+);
+UPDATE employees SET salary = salary * 1.10 WHERE dno = (SELECT dno FROM department WHERE dname = 'IT');
+DELETE FROM employees WHERE dno IS NULL;
+
+
+Q.5 Customer Table
+CREATE TABLE customer (
+  c_id INT PRIMARY KEY,
+  c_name VARCHAR(50),
+  c_contact NUMBER(10),
+  c_age INT,
+  c_city VARCHAR(50),
+  c_grade INT
+);
+INSERT INTO customer VALUES(1,'Ravi',9876543210,25,'Surat',10);
+INSERT INTO customer VALUES(2,'Pooja',8765432109,22,'Mumbai',12);
+INSERT INTO customer VALUES(3,'Amit',7654321098,30,'Pune',9);
+INSERT INTO customer VALUES(4,'Neha',9988776655,19,'Ahmedabad',7);
+INSERT INTO customer VALUES(5,'Kiran',8899776655,23,'Surat',11);
+SELECT * FROM customer;
+SELECT * FROM customer ORDER BY c_name ASC;
+SELECT c_age, c_city, MAX(c_grade) AS max_grade FROM customer GROUP BY c_age, c_city;
+SELECT c_age, c_name, c_city FROM customer WHERE c_age > 20;
+
+
+Q.6 PL/SQL Block - Welcome
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Welcome to PL/SQL World');
+END;
+/
+
+
+Q.7 PL/SQL - Minimum and Maximum
+
+DECLARE
+  a NUMBER := 10;
+  b NUMBER := 20;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Minimum: ' || LEAST(a,b));
+  DBMS_OUTPUT.PUT_LINE('Maximum: ' || GREATEST(a,b));
+END;
+/
+
+
+Q.8 PL/SQL - Fibonacci Series
+
+DECLARE
+  a NUMBER := 0;
+  b NUMBER := 1;
+  c NUMBER;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE(a);
+  DBMS_OUTPUT.PUT_LINE(b);
+  FOR i IN 1..8 LOOP
+    c := a + b;
+    DBMS_OUTPUT.PUT_LINE(c);
+    a := b;
+    b := c;
+  END LOOP;
+END;
+/
+
+
+Q.9 PL/SQL - Factorial
+
+DECLARE
+  n NUMBER := 5;
+  fact NUMBER := 1;
+BEGIN
+  FOR i IN 1..n LOOP
+    fact := fact * i;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Factorial of '||n||' = '||fact);
+END;
+/
+
+
+
+Q.10 PL/SQL - Swap Numbers
+
+DECLARE
+  a NUMBER := 10;
+  b NUMBER := 20;
+  temp NUMBER;
+BEGIN
+  temp := a;
+  a := b;
+  b := temp;
+  DBMS_OUTPUT.PUT_LINE('After swap: a='||a||', b='||b);
+END;
+/
+
+
+
+Q.11 PL/SQL - String Length
+
+
+DECLARE
+  str VARCHAR2(100) := 'Hello, PL/SQL';
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Length = ' || LENGTH(str));
+END;
+/
+
+
+
+Q.12 PL/SQL - Arithmetic Operations
+
+
+DECLARE
+  a NUMBER := 15;
+  b NUMBER := 4;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Sum = ' || (a + b));
+  DBMS_OUTPUT.PUT_LINE('Difference = ' || (a - b));
+  DBMS_OUTPUT.PUT_LINE('Product = ' || (a * b));
+  DBMS_OUTPUT.PUT_LINE('Quotient = ' || (a / b));
+  DBMS_OUTPUT.PUT_LINE('Remainder = ' || MOD(a,b));
+END;
+/
+
+
+
+Q.13 PL/SQL - Simple Interest
+
+
+DECLARE
+  p NUMBER := 1000;
+  r NUMBER := 5;
+  n NUMBER := 2;
+  i NUMBER;
+BEGIN
+  i := (p * r * n) / 100;
+  DBMS_OUTPUT.PUT_LINE('Simple Interest = ' || i);
+END;
+/
+
+
+
+Q.14 PL/SQL - Print Hello 5 times
+
+
+BEGIN
+  FOR i IN 1..5 LOOP
+    DBMS_OUTPUT.PUT_LINE('Hello World');
+  END LOOP;
+END;
+/
+
+
+Q.15 Simple Cursor for Birthday Wish
+
+
+
+DECLARE
+emp_id emp001.id%TYPE;
+emp_name emp001.name%TYPE;
+emp_birthdate emp001.birth_date%TYPE;
+CURSOR birthday_cursor IS
+SELECT id, name, birth_date
+FROM emp001
+WHERE TO_CHAR(birth_date, 'MM-DD') = TO_CHAR(SYSDATE, 'MM-DD');
+BEGIN
+OPEN birthday_cursor;
+LOOP
+FETCH birthday_cursor INTO emp_id, emp_name, emp_birthdate;
+EXIT WHEN birthday_cursor%NOTFOUND;
+DBMS_OUTPUT.PUT_LINE('HAPPY BIRTHDAY, ' || emp_name || '!');
+END LOOP;
+CLOSE birthday_cursor;
+END;
+/
+
+
+
+
+
+Q.16 Cursor FOR Loop for Employees in a City
+
+
+
+declare
+begin
+for emp_rec in (select id, name, city from emp2 where lower(city)='palanpur') loop
+dbms_output.put_line('id: '||emp_rec.id||',name: '||emp_rec.name||',city: '||emp_rec.city);
+end loop;
+end;
+/
+
+
+
+Q.17 Cursor FOR Loop for Employee Service Years
+
+BEGIN
+FOR emp_rec IN (SELECT emp_name,
+FLOOR(MONTHS_BETWEEN(SYSDATE, hire_date) / 12) AS years_completed
+FROM employeesmst)
+LOOP
+DBMS_OUTPUT.PUT_LINE('Thank you for working with us, ' || emp_rec.emp_name
+||'. You have completed ' || emp_rec.years_completed || ' years in our company.');
+END LOOP;
+END;
+/
+
+
+
+Q.18 Procedure to Check Even or Odd Number
+
+create or replace procedure check_even_odd(p_num in number)is
+begin
+if mod(p_num,2)=0 then
+dbms_output.put_line('the number'||p_num||'is even.');
+else
+dbms_output.put_line('the number'||p_num||'is odd.');
+end if;
+end;
+/
+BEGIN
+check_even_odd(10);
+check_even_odd(7);
+END;
+/
+
+
+
+Q.19 Function for Summation
+
+create or replace function sum_two_numbers (num1 in number, num2 in number) return number is
+total number;
+begin
+total :=num1+num2;
+return total;
+end;
+/
+declare
+a number:=25;
+b number:=35;
+result number;
+begin
+result:=sum_two_numbers(a,b);
+dbms_output.put_line('the summation of '|| a ||' and '|| b ||' is: '|| result);
+end;
+/
+
+
+Q.20 Package Specification and Body for Calculator
+
+
+create or replace package myCalculator is
+function add_num(a number, b number) return number;
+function sub_num(a number, b number) return number;
+function mul_num(a number, b number) return number;
+function div_num(a number, b number) return number;
+function rem_num(a number, b number) return number;
+end myCalculator;
+/
+create or replace package body myCalculator is
+function add_num(a number, b number) return number is
+begin
+return a + b;
+end;
+function sub_num(a number, b number) return number is
+begin
+return a - b;
+end;
+function mul_num(a number, b number)
+return number is
+Begin
+return a * b;
+end;
+function div_num(a number, b number) return number is
+begin
+if b=0 then
+raise_application_error(-20001, 'Division by zero not allowed');
+end if;
+return a / b;
+end;
+function rem_num(a number, b number) return number is
+begin
+if b=0 then
+raise_application_error(-20002, 'Cannot find remainder with divisor 0');
+end if;
+return mod(a, b);
+end;
+end myCalculator;
+/
+declare
+x number := 20;
+y number := 6;
+begin
+dbms_output.put_line('Addition: ' || myCalculator.add_num(x, y));
+dbms_output.put_line('Subtraction: ' || myCalculator.sub_num(x, y));
+dbms_output.put_line('Multiplication: ' || myCalculator.mul_num(x, y));
+dbms_output.put_line('Division: ' || myCalculator.div_num(x, y));
+dbms_output.put_line('Remainder: ' || myCalculator.rem_num(x, y));
+end;
+/
+
+
+
+
+Q.21  User-Defined Exception for Low Salary
+
+
+DECLARE
+emp_id emp3.id%TYPE := 3;
+emp_salary emp3.salary%TYPE;
+ex_low_salary EXCEPTION;
+CURSOR c_emp IS
+SELECT salary FROM emp3 WHERE id = emp_id;
+BEGIN
+FOR rec IN c_emp LOOP
+emp_salary := rec.salary;
+IF emp_salary < 20000 THEN
+RAISE ex_low_salary;
+ELSE
+DBMS_OUTPUT.PUT_LINE('Employee ID ' || emp_id || ' has sufficient salary: ' || emp_salary);
+END IF;
+END LOOP;
+EXCEPTION
+WHEN ex_low_salary THEN
+DBMS_OUTPUT.PUT_LINE('Error: Employee ID ' || emp_id || ' has low salary (' || emp_salary || ').');
+END;
+/
+
+
+
+Q.22  Update Salary with Implicit Cursor Attributes
+
+
+declare
+emp_id emp4.id%type := 1;
+begin
+update emp4 set salary = salary +5000 where id = emp_id;
+if sql%found then
+dbms_output.put_line('salary update successfully for emp id'||emp_id);
+dbms_output.put_line('total rows update: '||sql%rowcount);
+else
+dbms_output.put_line('no record found for emp id '||emp_id||'.');
+end if;
+end;
+/
+
+
+
+
+Q.23 Trigger for Automatic EID Insertion
+
+CREATE OR REPLACE TRIGGER p22_trigger BEFORE INSERT ON emp_mst1 FOR EACH ROW
+DECLARE
+emp_id emp_mst1.E_ID%TYPE;
+BEGIN
+SELECT NVL(MAX(E_ID), 0)
+INTO emp_id
+FROM emp_mst1;
+DBMS_OUTPUT.PUT_LINE('Current Max EID is: ' || NVL(emp_id, 0));
+IF :NEW.E_ID IS NULL THEN
+:NEW.E_ID := emp_id + 1;
+DBMS_OUTPUT.PUT_LINE('Assigned New EID: ' || :NEW.E_ID);
+END IF;
+END;
+/
+
+
+
+Q.24  Trigger to Enforce Minimum Salary on Insert/Update
+
+CREATE OR REPLACE TRIGGER trg123 BEFORE INSERT OR UPDATE ON EmployeeMst FOR EACH ROW
+BEGIN
+IF :NEW.Salary < 7000 THEN raise_application_error(-20001, 'Salary must be at least 7000.');
+END IF;
+END;
+/
+
+
